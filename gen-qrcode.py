@@ -21,8 +21,12 @@ qr.add_data(data)
 
 img = qr.make_image(fill_color=COLOR, back_color=BG_COLOR)
 
-name = input(f'Name({FILENAME}): ')
-img.save(f"{name or FILENAME}.png")
+filename = input(f'Filename({FILENAME}): ')
+try:
+    f = img.save(f"{filename or FILENAME}.png")
+    print(f'Saved: {filename or FILENAME}.png')
+except Exception as exc:
+    print(f'Failed to save IMG ({exc})')
 
 f = io.StringIO(data)
 qr.print_ascii(out=f)
