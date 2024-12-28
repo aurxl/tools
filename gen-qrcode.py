@@ -1,5 +1,7 @@
 import qrcode
 import io
+import sys
+from getpass import getpass
 
 SIZE=1
 BOX_SIZE=20
@@ -16,7 +18,15 @@ qr = qrcode.QRCode(
     border=BORDER,
 )
 
-data = input('QRCode Data: ')
+if  len(sys.argv) > 1:
+    if sys.argv[1] == 'wifi':
+        data = f'WIFI:S:{input("SSID: ")};T:{input("Type(WPA): ") or "WPA"};P:{getpass("Secret: ")};H:{input("Hidden(false): ") or "false"};'
+    else:
+        print('Unknown Keyword')
+        sys.exit(1)
+else:
+    data = input('QRCode Data: ')
+
 qr.add_data(data)
 
 img = qr.make_image(fill_color=COLOR, back_color=BG_COLOR)
