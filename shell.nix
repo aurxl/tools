@@ -4,6 +4,7 @@
       python312
       python312Packages.qrcode
       python312Packages.pillow
+      python312Packages.cython
     ];
 
   shellHook = ''
